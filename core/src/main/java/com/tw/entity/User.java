@@ -1,87 +1,127 @@
 package com.tw.entity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-/**
- * Created by twer on 15/7/8.
- */
+
+import javax.persistence.*;
+
 @Entity
-@Table(name="users")
-public class User{
+@Table(name = "users")
+public class User {
+
+    private int id;
+    private String userName;
+    private String password;
+    private Employee employee;
+
+    public User(String userName, String password, Employee employee) {
+        this.userName = userName;
+        this.password = password;
+        this.employee = employee;
+    }
+
+    public User(int id, String userName, String password, Employee employee) {
+
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.employee = employee;
+    }
+
+    public User() {
+
+    }
+
+    @OneToOne
+    public Employee getEmployee() {
+        return employee;
+    }
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
     @Id
-    @Column(name = "ID")
-    private int UserId;
-    @Column(name = "Name")
-    private String UserName;
-    @Column(name = "Sex")
-    private String UserSex;
-    @Column(name = "Mail")
-    private String UserMail;
-    @Column(name = "Age")
-    private int UserAge;
-    @Column(name = "Password")
-    private String UserPassword;
-
-
-    public User(){
-
+    @GeneratedValue
+    public int getId() {
+        return id;
     }
-    public User(int userId, String userName, String userSex, String userMail, int userAge, String userPassword) {
-        UserId = userId;
-        UserName = userName;
-        UserSex = userSex;
-        UserMail = userMail;
-        UserAge = userAge;
-        UserPassword = userPassword;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPassword(){
-        return UserPassword;
-    }
-
-    public int getUserId() {
-        return UserId;
-    }
-
-
+    @Column(name = "userName")
     public String getUserName() {
-        return UserName;
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-
-    public String getUserSex() {
-        return UserSex;
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
     }
 
-
-    public String getUserMail() {
-        return UserMail;
+    public void setPassword(String password) {
+        this.password = password;
     }
-
-
-    public int getUserAge() {
-        return UserAge;
-    }
-
-    public String getUserPassword() {
-        return UserPassword;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "UserId=" + UserId +
-                ", UserName='" + UserName + '\'' +
-                ", UserSex='" + UserSex + '\'' +
-                ", UserMail='" + UserMail + '\'' +
-                ", UserAge=" + UserAge +
-                ", UserPassword='" + UserPassword + '\'' +
-                '}';
-    }
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name = "id")
+//    private int id;
+//
+//    @Column(name = "name")
+//    private String name;
+//
+//    @Column(name = "password")
+//    private String password;
+//
+//    private Employee employee;
+//
+//    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//    @PrimaryKeyJoinColumn
+//    public Employee getEmployee() {
+//
+//        return this.employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
+//
+//    public User() {
+//
+//    }
+////
+////    public User(String name, String password, Employee employee) {
+////        this.name = name;
+////        this.password = password;
+////        this.employee = employee;
+////    }
+//
+//    public User(String name, String password) {
+//        this.name = name;
+//        this.password = password;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public int getId(){
+//        return this.id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
 }
-
-
-
-

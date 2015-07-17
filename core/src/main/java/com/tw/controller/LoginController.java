@@ -52,10 +52,10 @@ public class LoginController {
             User loginUser = users.get(0);
             String logInMessage = userService.canLogIn(loginUser, MD5Util.md5(password));
             if (logInMessage.equals("密码正确")) {
-                Cookie cookie = new Cookie("login_user", loginUser.getUserName());
-                cookie.setPath("/");
-                response.addCookie(cookie);
-
+//                Cookie cookie = new Cookie("login_user", loginUser.getUserName());
+//                cookie.setPath("/");
+//                response.addCookie(cookie);
+//
                 String url = this.getLastUrl(lastUrl);
 
                 return new ModelAndView("redirect:/" + url);

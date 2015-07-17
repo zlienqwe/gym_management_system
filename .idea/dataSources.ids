@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - gym_management_system@localhost" uuid="6ce20309-3dbd-4fe5-b7f1-e302bb4bdbcc">
+    <database-info product="MySQL" version="5.6.25" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="gym_management_system"/>
+    <table name="course_customer_relation" schema="" catalog="gym_management_system" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="courseId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="customerId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="course_customer_relation_ibfk_1" columns="courseId" ref-table="courses" ref-schema="" ref-catalog="gym_management_system" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="course_customer_relation_ibfk_2" columns="customerId" ref-table="customers" ref-schema="" ref-catalog="gym_management_system" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="courses" schema="" catalog="gym_management_system" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="employeeId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="courseName" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="courses_ibfk_1" columns="employeeId" ref-table="employees" ref-schema="" ref-catalog="gym_management_system" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="course_customer_relation_ibfk_1" table="course_customer_relation" schema="" catalog="gym_management_system" columns="courseId"/>
+      <exported-key name="schedules_ibfk_1" table="schedules" schema="" catalog="gym_management_system" columns="courseId"/>
+    </table>
+    <table name="customers" schema="" catalog="gym_management_system" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="employeeId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="customerName" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="customers_ibfk_1" columns="employeeId" ref-table="employees" ref-schema="" ref-catalog="gym_management_system" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="course_customer_relation_ibfk_2" table="course_customer_relation" schema="" catalog="gym_management_system" columns="customerId"/>
+    </table>
+    <table name="employees" schema="" catalog="gym_management_system" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="employeeName" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="role" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="courses_ibfk_1" table="courses" schema="" catalog="gym_management_system" columns="employeeId"/>
+      <exported-key name="customers_ibfk_1" table="customers" schema="" catalog="gym_management_system" columns="employeeId"/>
+      <exported-key name="users_ibfk_1" table="users" schema="" catalog="gym_management_system" columns="employeeId"/>
+    </table>
+    <table name="schedules" schema="" catalog="gym_management_system" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="courseId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="time" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="schedules_ibfk_1" columns="courseId" ref-table="courses" ref-schema="" ref-catalog="gym_management_system" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="schema_version" schema="" catalog="gym_management_system" type="TABLE">
+      <column name="version_rank" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="installed_rank" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="version" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="script" sqlType="VARCHAR" precision="1000" scale="0" nullable="false" jdbcType="12"/>
+      <column name="checksum" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="installed_by" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="installed_on" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="execution_time" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="success" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="version"/>
+      <index name="schema_version_ir_idx" unique="false" columns="installed_rank"/>
+      <index name="schema_version_s_idx" unique="false" columns="success"/>
+      <index name="schema_version_vr_idx" unique="false" columns="version_rank"/>
+    </table>
+    <table name="users" schema="" catalog="gym_management_system" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="employeeId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="userName" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="CHAR" precision="100" scale="0" nullable="false" jdbcType="1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="users_ibfk_1" columns="employeeId" ref-table="employees" ref-schema="" ref-catalog="gym_management_system" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+  </data-source>
+</component>

@@ -1,5 +1,6 @@
 package com.tw.controller;
 
+import com.tw.entity.Employee;
 import com.tw.entity.User;
 import com.tw.service.UserService;
 import com.tw.util.MD5Util;
@@ -67,12 +68,11 @@ public class UserController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView addUser(@RequestParam String name,
-                                @RequestParam String sex,
-                                @RequestParam String mail,
-                                @RequestParam int age,
-                                @RequestParam String password) {
-        User user = new User(0, name, sex, mail, age, MD5Util.md5(password));
+    public ModelAndView addUser(@RequestParam String userName,
+                                @RequestParam String password,
+                                @RequestParam Employee employee
+    ) {
+        User user = new User(userName, password, employee);
         userService.addUser(user);
 
         return new ModelAndView("redirect:/users");
@@ -109,14 +109,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public ModelAndView UpdateUser(@RequestParam int id,
-                                   @RequestParam String name,
-                                   @RequestParam String sex,
-                                   @RequestParam String mail,
-                                   @RequestParam int age,
-                                   @RequestParam String password
+    public ModelAndView UpdateUser(@RequestParam String userName,
+                                   @RequestParam String password,
+                                   @RequestParam Employee employee
                                    ) {
-        User user = new User(id, name, sex, mail, age, password);
+        User user = new User(userName, password, employee);
         userService.updateUser(user);
 
         return new ModelAndView("redirect:/users");

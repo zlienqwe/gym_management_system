@@ -5,7 +5,7 @@ import com.tw.entity.User;
 import com.tw.util.MD5Util;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
+import org.hibernate.annotations.SourceType;
 
 
 import java.util.List;
@@ -61,6 +61,10 @@ public class UserDao {
         session.update(user);
         session.getTransaction().commit();
         session.close();
+    }
+
+    public static void main(String[] args){
+        System.out.println(new UserDao().getUserById(1));
     }
 
 }
